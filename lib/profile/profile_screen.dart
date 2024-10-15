@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:onepointshop/widgets/announcements.dart';
 import 'package:onepointshop/widgets/appbar_widgets.dart';
 import 'package:onepointshop/widgets/listview_builder.dart';
+import 'package:onepointshop/widgets/most_popular_list.dart';
+import 'package:onepointshop/widgets/new_items_list.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -17,50 +19,56 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RichText(
-                text: const TextSpan(
-                  text: "Hi, Amin!",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w600
-                  )
-                ),
-              ),
-              Announcements(),
-              ListViewBuilder(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "My Orders",
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RichText(
+                  text: const TextSpan(
+                    text: "Hi, Amin!",
                     style: TextStyle(
-                      fontSize: 20,
+                      color: Colors.black,
+                      fontSize: 28,
                       fontWeight: FontWeight.w600
-                    ),
+                    )
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      OrdersView(status: 'To Pay',),
-                      OrdersView(status: 'To Receive',),
-                      OrdersView(status: 'To Review',),
-                    ],
-                  )
-                ],
-              )
-            ],
+                ),
+                Announcements(),
+                ListViewBuilder(),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "My Orders",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        OrdersView(status: 'To Pay',),
+                        OrdersView(status: 'To Receive',),
+                        OrdersView(status: 'To Review',),
+                      ],
+                    ),
+                  ],
+                ),
+                StoriesBuilder(),
+                NewItemsList(),
+                MostPolularList()
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
+
 
 class OrdersView extends StatelessWidget {
   final String status;
